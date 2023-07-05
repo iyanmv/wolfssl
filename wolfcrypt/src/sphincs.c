@@ -76,22 +76,22 @@ int wc_sphincs_sign_msg(const byte* in, word32 inLen, byte* out, word32 *outLen,
 
     if (ret == 0) {
         if ((key->optim == FAST_VARIANT) && (key->level == 1)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_128f_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_128f_simple);
         }
         else if ((key->optim == FAST_VARIANT) && (key->level == 3)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_192f_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_192f_simple);
         }
         else if ((key->optim == FAST_VARIANT) && (key->level == 5)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_256f_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_256f_simple);
         }
         else if ((key->optim == SMALL_VARIANT) && (key->level == 1)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_128s_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_128s_simple);
         }
         else if ((key->optim == SMALL_VARIANT) && (key->level == 3)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_192s_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_192s_simple);
         }
         else if ((key->optim == SMALL_VARIANT) && (key->level == 5)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_256s_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_256s_simple);
         }
 
         if (oqssig == NULL) {
@@ -183,22 +183,22 @@ int wc_sphincs_verify_msg(const byte* sig, word32 sigLen, const byte* msg,
 
     if (ret == 0) {
         if ((key->optim == FAST_VARIANT) && (key->level == 1)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_128f_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_128f_simple);
         }
         else if ((key->optim == FAST_VARIANT) && (key->level == 3)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_192f_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_192f_simple);
         }
         else if ((key->optim == FAST_VARIANT) && (key->level == 5)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_256f_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_256f_simple);
         }
         else if ((key->optim == SMALL_VARIANT) && (key->level == 1)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_128s_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_128s_simple);
         }
         else if ((key->optim == SMALL_VARIANT) && (key->level == 3)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_192s_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_192s_simple);
         }
         else if ((key->optim == SMALL_VARIANT) && (key->level == 5)) {
-            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake256_256s_simple);
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_256s_simple);
         }
 
         if (oqssig == NULL) {
