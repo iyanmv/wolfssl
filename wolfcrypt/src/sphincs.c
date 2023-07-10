@@ -244,7 +244,7 @@ int wc_sphincs_init(sphincs_key* key)
 /* Set the level of the sphincs private/public key.
  *
  * key   [out]  Sphincs key.
- * level [in]   Either 2,3 or 5.
+ * level [in]   Either 1, 3 or 5.
  * optim [in]   Either FAST_VARIANT or SMALL_VARIANT.
  * returns BAD_FUNC_ARG when key is NULL or level or optim are bad values.
  */
@@ -705,7 +705,7 @@ int wc_sphincs_export_key(sphincs_key* key, byte* priv, word32 *privSz,
 /* Generate a key pair.
  *
  * key   [in/out]  Sphincs key.
- * level [in]   Either 2,3 or 5.
+ * level [in]   Either 1, 3 or 5.
  * optim [in]   Either FAST_VARIANT or SMALL_VARIANT.
  * returns BAD_FUNC_ARG when key is NULL or level or optim are bad values.
  */
