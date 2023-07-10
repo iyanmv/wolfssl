@@ -702,6 +702,77 @@ int wc_sphincs_export_key(sphincs_key* key, byte* priv, word32 *privSz,
     return ret;
 }
 
+/* Generate a key pair.
+ *
+ * key   [in/out]  Sphincs key.
+ * level [in]   Either 2,3 or 5.
+ * optim [in]   Either FAST_VARIANT or SMALL_VARIANT.
+ * returns BAD_FUNC_ARG when key is NULL or level or optim are bad values.
+ */
+int wc_sphincs_make_key(sphincs_key* key, byte level, byte optim)
+{
+    int ret = 0;
+#ifdef HAVE_LIBOQS
+    OQS_SIG *oqssig = NULL;
+
+    if (key == NULL) {
+        return BAD_FUNC_ARG;
+    }
+
+    if (level != 1 && level != 3 && level != 5) {
+        return BAD_FUNC_ARG;
+    }
+
+    if (optim != FAST_VARIANT && optim != SMALL_VARIANT) {
+        return BAD_FUNC_ARG;
+    }
+
+    if (ret == 0) {
+        if ((key->optim == FAST_VARIANT) && (key->level == 1)) {
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_128f_simple);
+        }
+        else if ((key->optim == FAST_VARIANT) && (key->level == 3)) {
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_192f_simple);
+        }
+        else if ((key->optim == FAST_VARIANT) && (key->level == 5)) {
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_256f_simple);
+        }
+        else if ((key->optim == SMALL_VARIANT) && (key->level == 1)) {
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_128s_simple);
+        }
+        else if ((key->optim == SMALL_VARIANT) && (key->level == 3)) {
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_192s_simple);
+        }
+        else if ((key->optim == SMALL_VARIANT) && (key->level == 5)) {
+            oqssig = OQS_SIG_new(OQS_SIG_alg_sphincs_shake_256s_simple);
+        }
+
+        if (oqssig == NULL) {
+            ret = SIG_TYPE_E;
+        }
+    }
+
+    if ((ret == 0) &&
+        (OQS_SIG_keypair(oqssig, key->p, key->k)
+        == OQS_ERROR)) {
+        ret = BAD_FUNC_ARG;
+        }
+
+    if (ret == 0) {
+        key->pubKeySet = 1;
+        key->prvKeySet = 1;
+    }
+
+    if (oqssig != NULL) {
+        OQS_SIG_free(oqssig);
+    }
+
+#else
+    ret = NOT_COMPILED_IN;
+#endif
+    return ret;
+}
+
 /* Check the public key of the sphincs key matches the private key.
  *
  * key     [in]      Sphincs private/public key.

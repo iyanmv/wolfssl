@@ -114,6 +114,8 @@ WOLFSSL_API
 void wc_sphincs_free(sphincs_key* key);
 
 WOLFSSL_API
+int wc_sphincs_make_key(sphincs_key* key, byte level, byte optim);
+WOLFSSL_API
 int wc_sphincs_import_public(const byte* in, word32 inLen, sphincs_key* key);
 WOLFSSL_API
 int wc_sphincs_import_private_only(const byte* priv, word32 privSz,
